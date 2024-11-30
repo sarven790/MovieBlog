@@ -1,0 +1,99 @@
+scalar DateTime
+
+type Query {
+    getAllMovie: [Movie]
+    getAllActor: [Actor]
+    getAllDirector: [Director]
+    getAllCategory: [Category]
+    getAllCountry: [Country]
+    filterMovie(filterMovieRequest: FilterMovieRequest): [Movie]
+}
+
+type Mutation {
+    createMovie(movieRequest: MovieRequest): Movie
+    createActor(actorRequest: ActorRequest): Actor
+    createDirector(directorRequest: DirectorRequest): Director
+    createCategory(categoryRequest: CategoryRequest): Category
+    createCountry(countryRequest: CountryRequest): Country
+}
+
+type Actor {
+    id:ID
+    createdDate:DateTime
+    modifiedDate:DateTime
+    movies:[Movie]
+    name:String
+}
+
+type Director {
+    id:ID
+    createdDate:DateTime
+    modifiedDate:DateTime
+    movies:[Movie]
+    name:String
+}
+
+type Movie {
+    id:ID
+    createdDate:DateTime
+    modifiedDate:DateTime
+    title:String
+    detail:String
+    director:Director
+    releaseYear:String
+    countryCode:String
+    actors:[Actor]
+    categories:[Category]
+    imdb:String
+}
+
+type Category {
+    id:ID
+    createdDate:DateTime
+    modifiedDate:DateTime
+    movies:[Movie]
+    name:String
+}
+
+type Country {
+    id:ID
+    createdDate:DateTime
+    modifiedDate:DateTime
+    countryCode:String
+    countryName:String
+}
+
+input CountryRequest {
+    countryCode:String
+    countryName:String
+}
+
+input FilterMovieRequest {
+    id:ID
+    releaseYear:String
+    countryCode:String
+    filterName:String
+}
+
+input CategoryRequest {
+    name:String
+}
+
+input DirectorRequest {
+    name:String
+}
+
+input ActorRequest {
+    name:String
+}
+
+input MovieRequest {
+    title:String
+    detail:String
+    directorId:ID
+    actorIdList:[ID]
+    categoryIdList:[ID]
+    releaseYear:String
+    countryCode:String
+    imdb:String
+}
